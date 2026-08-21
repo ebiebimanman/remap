@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>りまっぷ｜買い忘れがなくなるメモアプリ</title>
+<meta name="description" content="お店に近づいたら通知でおしらせ。買い忘れがなくなる位置情報メモアプリ「りまっぷ」。">
+<meta name="theme-color" content="#FFDD00">
+<link rel="icon" href="assets/app-icon.png">
+<link rel="apple-touch-icon" href="assets/app-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="りまっぷ｜買い忘れがなくなるメモアプリ">
+<meta property="og:description" content="お店に近づいたら通知でおしらせ。買い忘れがなくなる位置情報メモアプリ「りまっぷ」。">
+<meta property="og:image" content="assets/app-icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header-wrap">
+  <div class="shell shell--header">
+    <div class="header">
+      <button type="button" class="icon-btn" id="menuBtn" aria-label="メニュー" aria-expanded="false" aria-controls="menu">
+        <img src="assets/icon-menu.svg" alt="" width="32" height="32">
+      </button>
+
+      <a class="brand" href="#/" aria-label="トップへ">
+        <img src="assets/app-icon.png" alt="りまっぷ" width="32" height="32">
+      </a>
+
+      <a class="icon-btn" href="https://t.co/16Txm1J7cD" target="_blank" rel="noopener" aria-label="App Storeでダウンロード">
+        <img src="assets/icon-download.svg" alt="" width="32" height="32">
+      </a>
+    </div>
+
+    <!-- backdrop-filter を効かせるため Header の外に出している -->
+    <div class="menu-padding" id="menu">
+      <nav class="menu" aria-label="サブメニュー">
+        <a class="menu-item" href="#/updates">
+          <img src="assets/icon-update.svg" alt="" width="32" height="32">
+          <span>アップデート予定</span>
+        </a>
+        <a class="menu-item" href="#/bug">
+          <img src="assets/icon-bug.svg" alt="" width="32" height="32">
+          <span>バグ報告</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="shell" id="main">
+
+  <!-- ============ TOP ============ -->
+  <section class="view view--top" id="view-top" data-route="/">
+    <div class="hero">
+      <div class="page-title">
+        <h1>買い忘れがなくなる<br>メモアプリ</h1>
+        <p class="page-title__sub">お店に近づいたら通知でおしらせ</p>
+      </div>
+
+      <div class="notification-preview">
+        <div class="illustration">
+          <img src="assets/illustration.svg" alt="買い物メモを見て驚いている人のイラスト">
+        </div>
+
+        <div class="notification">
+          <div class="notification__icon">
+            <img src="assets/app-icon.png" alt="" width="39" height="39">
+          </div>
+          <div class="notification__body">
+            <div class="notification__text">
+              <p class="notification__title">りまっぷ</p>
+              <p class="notification__desc">近くにダイソーがあります。スポンジを買いましょう！</p>
+            </div>
+            <p class="notification__time">今</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="badge" href="https://t.co/16Txm1J7cD" target="_blank" rel="noopener">
+      <img src="assets/appstore-badge.svg" alt="App Store でダウンロード">
+    </a>
+  </section>
+
+  <!-- ============ UPDATE_LIST ============ -->
+  <section class="view view--list" id="view-updates" data-route="/updates" hidden>
+    <div class="page-title">
+      <h1>アップデート予定</h1>
+      <p class="page-title__sub">おたのしみに</p>
+    </div>
+
+    <div class="list-update">
+      <article class="card-todo" style="--card-bg:#E01A4F; --card-fg:#BCFFC3;">
+        <div class="card-todo__text">
+          <p class="card-todo__title">セリア追加</p>
+          <p class="card-todo__status">開発中</p>
+        </div>
+        <div class="card-todo__fade" aria-hidden="true"></div>
+        <div class="card-todo__check" aria-hidden="true"></div>
+      </article>
+
+      <article class="card-todo" style="--card-bg:#345995; --card-fg:#FFA6ED;">
+        <div class="card-todo__text">
+          <p class="card-todo__title">ダークモード対応</p>
+          <p class="card-todo__status">検討中</p>
+        </div>
+        <div class="card-todo__fade" aria-hidden="true"></div>
+        <div class="card-todo__check" aria-hidden="true"></div>
+      </article>
+
+      <article class="card-todo" style="--card-bg:#F15946; --card-fg:#0C090D;">
+        <div class="card-todo__text">
+          <p class="card-todo__title">アイコンカスタム</p>
+          <p class="card-todo__status">検討中</p>
+        </div>
+        <div class="card-todo__fade" aria-hidden="true"></div>
+        <div class="card-todo__check" aria-hidden="true"></div>
+      </article>
+
+      <article class="card-todo" style="--card-bg:#823C29; --card-fg:#FFDD00;">
+        <div class="card-todo__text">
+          <p class="card-todo__title">リスト一瞬消えるバグ</p>
+          <p class="card-todo__status">調査中</p>
+        </div>
+        <div class="card-todo__fade" aria-hidden="true"></div>
+        <div class="card-todo__check" aria-hidden="true"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ BUG_REPORT ============ -->
+  <section class="view view--bug" id="view-bug" data-route="/bug" hidden>
+    <div class="page-title">
+      <h1>バグ報告</h1>
+      <p class="page-title__sub">ごめんなさい！直します</p>
+    </div>
+
+    <form class="bug-form" id="bugForm" novalidate>
+      <div class="text-input">
+        <textarea id="bugText" maxlength="1000" aria-label="バグの内容" spellcheck="false"></textarea>
+        <div class="text-input__placeholder" id="bugPlaceholder" aria-hidden="true">バグについて<br>詳しく教えてください</div>
+      </div>
+      <!-- ボット対策のハニーポット（人間には見えない） -->
+      <div class="honeypot" aria-hidden="true">
+        <label>website<input type="text" id="bugHoneypot" name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <button type="submit" class="submit-button" id="bugSubmit" disabled>送信</button>
+      <p class="form-error" id="bugError" role="alert" hidden></p>
+    </form>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <img src="assets/icon-check.svg" alt="" width="20" height="15">
+  <span>送信しました！</span>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
