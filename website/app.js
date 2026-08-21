@@ -185,7 +185,9 @@
         if (result && result.ok) onSent();
         else throw new Error(result && result.error || 'failed');
       })
-      .catch(function () {
+      .catch(function (err) {
+        // 原因の切り分け用。利用者にはそのまま見せない
+        if (window.console) console.warn('[bug-report]', err);
         setSending(false);
         setError('送信できませんでした。時間をおいてもう一度お試しください。');
       });
