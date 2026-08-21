@@ -45,7 +45,6 @@ var ENDPOINT = 'https://script.google.com/macros/s/XXXXXXXX/exec';
 
 ## 補足
 
-- `ENDPOINT` が空のあいだは、送信ボタンは従来どおり `mailto:` にフォールバックする
 - スクリプトを書き換えたときは「デプロイ」→「デプロイを管理」→ 鉛筆アイコン →
   バージョンを「新バージョン」にして更新する。**URL は変わらない**
 - 送信できる上限は Gmail アカウントで 1 日 100 通（Apps Script の割り当て）
@@ -56,5 +55,3 @@ var ENDPOINT = 'https://script.google.com/macros/s/XXXXXXXX/exec';
 - 所有者のアドレスが自動で取得できない構成の場合は、
   「プロジェクトの設定」→「スクリプト プロパティ」に `TO` という名前で
   宛先メールアドレスを登録すればそちらが使われる
-- `ENDPOINT` を設定したあとは `website/app.js` の `MAIL_TO` と `sendByMailto()` は
-  使われなくなる。公開 JS からメールアドレスを消したければ、あわせて削除してよい

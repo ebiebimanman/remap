@@ -8,8 +8,7 @@
   'use strict';
 
   /* バグ報告の送信先（Google Apps Script のウェブアプリ URL）。
-     設定手順は docs/bug-report-form/README.md を参照。
-     空のあいだは mailto: にフォールバックする。 */
+     設定手順は docs/bug-report-form/README.md を参照。 */
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzIISZ_mwOYhbpsyoU6lARLI3kG8kn3Y1L6DkbqtoXbe4QIQjMNfAzw-WCekyndLY2zUg/exec';
 
   var FADE = 300;      // フェード時間（styles.css の --fade と揃える）
@@ -119,9 +118,6 @@
   var toastTimer = null;
   var sending = false;
 
-  // ENDPOINT 未設定時のみ使う。単純なスクレイピング避けに実行時組み立て
-  var MAIL_TO = ['ochabi.iwsknnk', 'gmail.com'].join('@');
-
   function sync() {
     var len = textarea.value.length;
     submit.disabled = sending || len < 1 || len > MAX_LEN;
@@ -159,14 +155,6 @@
     setError('');
     setSending(false);
     showToast();
-  }
-
-  // ENDPOINT 未設定のときの保険。メールアプリを起動する
-  function sendByMailto(body) {
-    window.location.href = 'mailto:' + MAIL_TO +
-      '?subject=' + encodeURIComponent('【りまっぷ】バグ報告') +
-      '&body=' + encodeURIComponent(body);
-    onSent();
   }
 
   function sendToEndpoint(body) {
@@ -208,8 +196,11 @@
       var body = textarea.value.trim();
       if (body.length < 1 || body.length > MAX_LEN) return;
 
-      if (ENDPOINT) sendToEndpoint(body);
-      else sendByMailto(body);
+      if (!ENDPOINT) {
+        setError('送信先が未設定です。');
+        return;
+      }
+      sendToEndpoint(body);
     });
   }
 
