@@ -28,6 +28,10 @@
   var current = null;
   var swapTimer = null;
 
+  /* PC では3画面を横並びにするので、切り替えずに全部見せる。
+     ブレークポイントは styles.css の PC 用メディアクエリと揃えること。 */
+  var wideMQ = window.matchMedia('(min-width: 1120px)');
+
   function routeFromHash() {
     var raw = (location.hash || '').replace(/^#/, '');
     if (!raw || raw === '/') return '/';
@@ -42,7 +46,18 @@
     current = el;
   }
 
+  function showAll() {
+    clearTimeout(swapTimer);
+    views.forEach(function (el) {
+      el.hidden = false;
+      el.classList.add('is-shown');
+    });
+    current = null;
+  }
+
   function render(initial) {
+    if (wideMQ.matches) { showAll(); return; }
+
     var next = routes[routeFromHash()];
     if (!next || next === current) return;
 
@@ -69,6 +84,25 @@
     closeMenu();
     render(false);
   });
+
+  function onWidthChange() {
+    if (wideMQ.matches) {
+      closeMenu();
+      showAll();
+      return;
+    }
+    // スマホ幅に戻ったら、いま開いているハッシュの画面だけに戻す
+    clearTimeout(swapTimer);
+    views.forEach(function (el) {
+      el.hidden = true;
+      el.classList.remove('is-shown');
+    });
+    current = null;
+    render(true);
+  }
+
+  if (wideMQ.addEventListener) wideMQ.addEventListener('change', onWidthChange);
+  else if (wideMQ.addListener) wideMQ.addListener(onWidthChange); // 旧 Safari
 
   /* -------------------------------------------------------
      ヘッダーメニュー
