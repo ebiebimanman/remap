@@ -358,12 +358,12 @@ p, h1 { margin: 0; }
   padding: 0 20px;
   border-radius: 8px;
   background: #ffffff;
-  border: 1px solid #000000;
+  border: 3px solid #000000;
   color: #000000;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 15px;
-  line-height: 3;
+  line-height: 1;
   white-space: nowrap;
   text-decoration: none;
   transition: transform 150ms ease;
