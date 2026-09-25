@@ -363,7 +363,7 @@ p, h1 { margin: 0; }
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 15px;
-  line-height: 1;
+  line-height: 3;
   white-space: nowrap;
   text-decoration: none;
   transition: transform 150ms ease;
