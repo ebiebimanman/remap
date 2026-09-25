@@ -404,6 +404,14 @@ p, h1 { margin: 0; }
   height: 24px;
   border-radius: 4px;
   background: var(--glass-weak);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-todo__check img {
+  width: 14px;
+  height: auto;
 }
 
 /* ---------------------------------------------------------
