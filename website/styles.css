@@ -345,15 +345,37 @@ p, h1 { margin: 0; }
    --------------------------------------------------------- */
 .view--list { justify-content: flex-start; }
 
+.list-update-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 .list-update {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
   gap: 8px;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+/* スクロールでカードが唐突に途切れて見えないよう、上端だけ地の黄色にフェードさせる。
+   下端はあえてフェードさせず、カードが見切れることで続きがあると伝える */
+.list-update__fade {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: 32px;
+  background: linear-gradient(
+    to bottom,
+    var(--yellow) 52.404%,
+    color-mix(in srgb, var(--yellow) 64%, transparent) 74.038%,
+    color-mix(in srgb, var(--yellow) 0%, transparent) 100%
+  );
+  pointer-events: none;
 }
 
 .card-todo {
@@ -592,7 +614,8 @@ p, h1 { margin: 0; }
 
 /* color-mix 非対応ブラウザ向けフォールバック（フェードなしのベタ塗りは避ける） */
 @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-  .card-todo__fade { display: none; }
+  .card-todo__fade,
+  .list-update__fade { display: none; }
 }
 
 /* ---------------------------------------------------------
