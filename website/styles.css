@@ -366,32 +366,17 @@ p, h1 { margin: 0; }
   -webkit-overflow-scrolling: touch;
 }
 
-/* スクロールでカードが唐突に途切れて見えないよう、上端だけ地の黄色にフェードさせる。
-   一番上にいるときは隠しておき、スクロールして隠れているカードがあるときだけ出す。
-   下端はあえてフェードさせず、カードが見切れることで続きがあると伝える */
+/* カードが唐突に途切れて見えないよう、リスト上端だけ地の黄色から
+   滑らかにフェードさせる。下端はあえてフェードさせず、カードが
+   見切れることで続きがあると伝える */
 .list-update__fade {
   position: absolute;
-  left: 0;
-  right: 0;
-  /* 「おたのしみに」の上あたりから始まるよう、リスト上端より上に伸ばす。
-     そのぶん上端は透明にして、サブタイトルの文字を隠さないようにする */
-  top: -48px;
+  inset: 0 0 auto;
   z-index: 1;
-  height: 128px;
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--yellow) 0%, transparent) 0%,
-    var(--yellow) 37.5%,
-    var(--yellow) 71%,
-    color-mix(in srgb, var(--yellow) 64%, transparent) 84%,
-    color-mix(in srgb, var(--yellow) 0%, transparent) 100%
-  );
-  opacity: 0;
-  transition: opacity 150ms ease;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--yellow), transparent);
   pointer-events: none;
 }
-
-.list-update-wrap.is-scrolled .list-update__fade { opacity: 1; }
 
 .card-todo {
   position: relative;
@@ -631,8 +616,7 @@ p, h1 { margin: 0; }
 
 /* color-mix 非対応ブラウザ向けフォールバック（フェードなしのベタ塗りは避ける） */
 @supports not (background: color-mix(in srgb, red 50%, transparent)) {
-  .card-todo__fade,
-  .list-update__fade { display: none; }
+  .card-todo__fade { display: none; }
 }
 
 /* ---------------------------------------------------------
