@@ -181,7 +181,6 @@ p, h1 { margin: 0; }
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 }
 
 .view {
@@ -191,6 +190,7 @@ p, h1 { margin: 0; }
   flex-direction: column;
   gap: 24px;
   padding-top: 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   overflow: hidden;
   opacity: 0;
   transition: opacity var(--fade) ease;
@@ -343,7 +343,11 @@ p, h1 { margin: 0; }
 /* ---------------------------------------------------------
    UPDATE_LIST
    --------------------------------------------------------- */
-.view--list { justify-content: flex-start; }
+.view--list {
+  justify-content: flex-start;
+  /* 一番下のカードが見切れる位置まで使い切りたいので、下の余白は付けない */
+  padding-bottom: 0;
+}
 
 .list-update-wrap {
   position: relative;
@@ -363,20 +367,25 @@ p, h1 { margin: 0; }
 }
 
 /* スクロールでカードが唐突に途切れて見えないよう、上端だけ地の黄色にフェードさせる。
+   一番上にいるときは隠しておき、スクロールして隠れているカードがあるときだけ出す。
    下端はあえてフェードさせず、カードが見切れることで続きがあると伝える */
 .list-update__fade {
   position: absolute;
   inset: 0 0 auto;
   z-index: 1;
-  height: 32px;
+  height: 64px;
   background: linear-gradient(
     to bottom,
     var(--yellow) 52.404%,
     color-mix(in srgb, var(--yellow) 64%, transparent) 74.038%,
     color-mix(in srgb, var(--yellow) 0%, transparent) 100%
   );
+  opacity: 0;
+  transition: opacity 150ms ease;
   pointer-events: none;
 }
+
+.list-update-wrap.is-scrolled .list-update__fade { opacity: 1; }
 
 .card-todo {
   position: relative;

@@ -105,6 +105,22 @@
   else if (wideMQ.addListener) wideMQ.addListener(onWidthChange); // 旧 Safari
 
   /* -------------------------------------------------------
+     アップデート予定リストの上端フェード
+     一番上にいるときは隠し、スクロールして隠れているカードが
+     あるときだけ表示する
+     ------------------------------------------------------- */
+  var listUpdate = document.querySelector('.list-update');
+  var listUpdateWrap = document.querySelector('.list-update-wrap');
+
+  if (listUpdate && listUpdateWrap) {
+    var syncListFade = function () {
+      listUpdateWrap.classList.toggle('is-scrolled', listUpdate.scrollTop > 0);
+    };
+    listUpdate.addEventListener('scroll', syncListFade);
+    syncListFade();
+  }
+
+  /* -------------------------------------------------------
      ヘッダーメニュー
      ------------------------------------------------------- */
   var menuBtn = document.getElementById('menuBtn');
